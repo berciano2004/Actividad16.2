@@ -1,0 +1,61 @@
+Tarea evaluable: Automatización de pruebas con Selenium y JUnit 5
+
+1. Introducción
+
+Esta práctica automatiza el flujo de login y selección de productos en la web de prueba SauceDemo: https://www.saucedemo.com.
+Se usa el patrón Page Object Model para separar la lógica de navegación de las comprobaciones de los tests.
+JUnit 5 gestiona la ejecución de pruebas y Selenium WebDriver interactúa con el navegador.
+
+2. Clases principales implementadas
+
+- LoginPage
+  - escribe el nombre de usuario
+  - escribe la contraseña
+  - pulsa el botón de acceso
+  - realiza el login completo con un método único
+
+- InventoryPage
+  - añade un producto al carrito
+  - obtiene el número de productos en el carrito
+  - comprueba si un texto esperado aparece en pantalla
+  - obtiene el texto del botón del producto
+  - abre el carrito y comprueba un producto dentro del mismo
+
+- BaseTest
+  - prepara el navegador con @BeforeEach
+  - cierra el navegador con @AfterEach
+  - define los objetos de página que usan los tests
+
+- LoginTest
+  - loginCorrecto: inicia sesión con credenciales válidas y comprueba que la URL contiene /inventory
+  - loginIncorrecto: intenta iniciar sesión con contraseña inválida y comprueba que aparece un mensaje de error
+
+- InventoryTest
+  - anadirUnProductoAlCarrito: agrega un producto y comprueba el contador del carrito
+  - anadirDosProductosAlCarrito: agrega dos productos y comprueba el contador del carrito
+  - botonCambiaTrasAnadirProducto: comprueba que el botón cambia de "Add to cart" a "Remove"
+  - carritoMuestraProducto: prueba adicional que verifica que el producto agregado aparece en el carrito
+
+3. Elementos usados
+
+- Selenium WebDriver: interactúa con los campos y botones de la página.
+- ChromeDriver gestionado por WebDriverManager para facilitar la ejecución en diferentes sistemas.
+- JUnit 5: usa @Test, @BeforeEach, @AfterEach, assertTrue y assertEquals.
+- Page Object Model: cada página de la aplicación tiene su clase con métodos claros.
+
+4. Ventajas del patrón Page Object Model
+
+- Mejora el mantenimiento del código, porque los localizadores y acciones están centralizados.
+- Reduce la duplicación en los tests.
+- Hace los tests más legibles: los casos de prueba se centran en la lógica de validación.
+- Permite actualizar un cambio de interfaz en un solo lugar.
+
+5. Aprendizajes y reflexión personal
+
+Durante esta tarea aprendí a:
+- estructurar un proyecto de automatización usando Maven, Selenium y JUnit 5.
+- usar las anotaciones @BeforeEach y @AfterEach para abrir y cerrar el navegador antes y después de cada prueba.
+- aplicar el patrón Page Object Model para separar el código de página del código de prueba.
+- diseñar tests que verifican tanto la navegación como el estado de la aplicación (URL, contador del carrito, contenido de mensajes).
+
+La práctica me ayudó a comprender que una buena organización del código en pruebas automatizadas facilita mucho su extensión y mantenimiento. Además, ver cómo el botón cambia de estado y cómo se refleja el contador del carrito refuerza la idea de que las aserciones deben validar el comportamiento visible del usuario.
